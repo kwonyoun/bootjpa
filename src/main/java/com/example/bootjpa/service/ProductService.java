@@ -10,14 +10,5 @@ public interface ProductService {
 
     public ProductDto getProduct(@PathVariable String productId);
     public ProductDto saveProduct(String productId, String productName, int productPrice, int productStock);
-
-    // public ProductDto getProduct(@PathVariable String productId){
-    //     return productService.getProduct(productId);
-    // }
-
-    // public ProductDto saveProduct(String productId, String productName, int productPrice, int productStock){
-
-    //     return productService.saveProduct(productId, productName, productPrice, productStock);
-    // }
     
 }
