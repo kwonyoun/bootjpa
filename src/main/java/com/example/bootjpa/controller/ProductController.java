@@ -31,8 +31,8 @@ public class ProductController {
     public ProductDto createProduct(@RequestBody ProductDto productDto){
         String productId = productDto.getProductId();
         String productName = productDto.getProductName();
-        int productPrice = productDto.getProductPrice();
-        int productStock = productDto.getProductStock();
+        Integer productPrice = productDto.getProductPrice();
+        Integer productStock = productDto.getProductStock();
 
         return productService.saveProduct(productId, productName, productPrice, productStock);
     }

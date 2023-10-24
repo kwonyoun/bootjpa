@@ -28,8 +28,8 @@ public class ProductEntity {
 
     String productName;
 
-    int productPrice;
+    Integer productPrice;
     
-    int productStock;
+    Integer productStock;
     
 }
