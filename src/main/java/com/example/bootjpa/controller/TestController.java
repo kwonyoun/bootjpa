@@ -19,16 +19,16 @@ public class TestController {
         return new ModelAndView("test");
     }
 
-    @GetMapping(value = "/")
-    public ModelAndView homePage(Model model) { 
-        model.addAttribute("person", "nanan"); // 3
-        return new ModelAndView("test");
-    }
-
-    // @GetMapping("/")
-    // public ModelAndView index(){
-    //     return new ModelAndView("home/home");
+    // @GetMapping(value = "/")
+    // public ModelAndView homePage(Model model) { 
+    //     model.addAttribute("person", "nanan"); // 3
+    //     return new ModelAndView("test");
     // }
+
+    @GetMapping("/")
+    public ModelAndView index(){
+        return new ModelAndView("home/home");
+    }
 
     // @GetMapping("/login/login")
     // public ModelAndView login(){
