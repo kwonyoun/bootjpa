@@ -26,7 +26,8 @@ public class TestController {
     // }
 
     @GetMapping("/")
-    public ModelAndView index(){
+    public ModelAndView index(Model model){
+        model.addAttribute("list", "what");
         return new ModelAndView("home/home");
     }
 
