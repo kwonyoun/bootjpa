@@ -30,9 +30,9 @@ public class TestController {
         return new ModelAndView("home/home");
     }
 
-    // @GetMapping("/login/login")
-    // public ModelAndView login(){
-    //     return new ModelAndView("login/login");
-    // }
+    @GetMapping("/login/login")
+    public ModelAndView login(){
+        return new ModelAndView("login/login");
+    }
     
 }
