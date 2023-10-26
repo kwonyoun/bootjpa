@@ -16,12 +16,7 @@ public class MemberController {
     public MemberController(MemberService memberService){
         this.memberService = memberService;
     }
-    
 
-    //회원가입페이지
-    @GetMapping
-    public ModelAndView signupPage(){
-        return new ModelAndView("signup") ;
-    }
+    
 
 }

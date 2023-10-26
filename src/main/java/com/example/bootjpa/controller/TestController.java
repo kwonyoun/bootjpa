@@ -37,12 +37,12 @@ public class TestController {
     // }
 
     @GetMapping("/")
-    public ModelAndView index(Model model){
+    public ModelAndView index(){
+        ModelAndView mav = new ModelAndView("home/home");
         List<ProductEntity> productEntity = productService.getProductList();
-        // System.out.println("here                "+productEntity);
-        model.addAttribute("whatlist", "what");
-        model.addAttribute("list", productEntity);
-        return new ModelAndView("home/home");
+        mav.addObject("list", productEntity);
+        mav.addObject("whatlist", "what");
+        return mav;
     }
 
     @GetMapping("/login/login")
