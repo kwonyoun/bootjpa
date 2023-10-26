@@ -1,13 +1,24 @@
 package com.example.bootjpa.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.bootjpa.data.entity.ProductEntity;
+import com.example.bootjpa.service.ProductService;
+
 @RestController
 public class TestController {
+
+    private ProductService productService;
+    public TestController(ProductService productService){
+        this.productService = productService;
+    }
 
     @GetMapping("/test")
     public String test(){
@@ -27,7 +38,10 @@ public class TestController {
 
     @GetMapping("/")
     public ModelAndView index(Model model){
-        model.addAttribute("list", "what");
+        List<ProductEntity> productEntity = productService.getProductList();
+        System.out.println("here                "+productEntity);
+        model.addAttribute("whatlist", "what");
+        model.addAttribute("list", productEntity);
         return new ModelAndView("home/home");
     }
 

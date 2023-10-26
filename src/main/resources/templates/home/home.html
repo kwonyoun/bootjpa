@@ -24,8 +24,13 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>1</td>
-                    <td th:text="${list}">제목입니다.</td>
+                    <td th:text="${whatlist}">제목입니다.</td>
+                    <tr th:each = "board:${list}">
+                        <td th:text="${board.productId}">1</td>
+                        <td th:text="${board.productName}">1</td>
+                        <td th:text="${board.productPrice}">제목입니다.</td>
+                        <td th:text="${board.productStock}">제목입니다.</td>
+                    </tr>
                     
                 </tr>
             </tbody>

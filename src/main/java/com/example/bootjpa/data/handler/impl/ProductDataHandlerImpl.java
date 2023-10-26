@@ -8,6 +8,8 @@ import com.example.bootjpa.data.dao.ProductDao;
 import com.example.bootjpa.data.entity.ProductEntity;
 import com.example.bootjpa.data.handler.ProductDataHandler;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class ProductDataHandlerImpl implements ProductDataHandler {
@@ -28,6 +30,13 @@ public class ProductDataHandlerImpl implements ProductDataHandler {
     @Override
     public ProductEntity getProductEntity(String productId){
         return productDao.getProduct(productId);
+    }
+
+    @Override
+    public List<ProductEntity> getProductList(){
+
+        
+        return productDao.getProductList();
     }
     
 }
