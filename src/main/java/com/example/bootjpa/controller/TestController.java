@@ -39,7 +39,7 @@ public class TestController {
     @GetMapping("/")
     public ModelAndView index(Model model){
         List<ProductEntity> productEntity = productService.getProductList();
-        System.out.println("here                "+productEntity);
+        // System.out.println("here                "+productEntity);
         model.addAttribute("whatlist", "what");
         model.addAttribute("list", productEntity);
         return new ModelAndView("home/home");
