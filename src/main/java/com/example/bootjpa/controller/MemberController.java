@@ -2,6 +2,7 @@ package com.example.bootjpa.controller;
 
 import javax.validation.Valid;
 
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.bootjpa.data.dto.MemberDto;
-import com.example.bootjpa.security.AccountValidator;
+import com.example.bootjpa.security.MemberValidator;
 import com.example.bootjpa.service.MemberService;
 
 @RestController
@@ -19,28 +20,30 @@ import com.example.bootjpa.service.MemberService;
 public class MemberController {
 
     private MemberService memberService;
-    public MemberController(MemberService memberService){
-        this.memberService = memberService;
-    }
-    private AccountValidator accountValidator;
+    private MemberValidator memberValidator;
     
     @PostMapping("/save")
-     public String register(@Valid MemberDto memberDto, BindingResult bindingResult){
+     public Response register(@Valid MemberDto memberDto, BindingResult bindingResult){
 
-         accountValidator.validate(memberDto, bindingResult);
+        Response response = new Response();
+         memberValidator.validate(memberDto, bindingResult);
 
          System.out.println(bindingResult.hasErrors());
          if(bindingResult.hasErrors()) {
-             return "/signup"; // 실패
+            response.setMessage("유효성 검사 에러");
+             return response; // 실패
          }
          try {
              // 성공
              memberService.save(memberDto);
-             return "redirect:/";
+             response.setMessage("회원가입 성공하였습니다.");
+             return response;
 
          } catch (IllegalStateException e) {
-            // model.addAttribute("errorMessage", e.getMessage());
-            return "/signup";
+                // response.setResponse("failed");
+                response.setMessage("회원가입을 하는 도중 오류가 발생했습니다.");
+                // response.setData(e.toString());
+            return response;
         }
 
      }
