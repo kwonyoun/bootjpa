@@ -6,6 +6,6 @@ import com.example.bootjpa.data.entity.MemberEntity;
 
 public interface MemberRepository extends JpaRepository<MemberEntity, String> {
 
-    MemberEntity findByUsername(String memberId);
+    MemberEntity findByUsername(String username);
     
 }

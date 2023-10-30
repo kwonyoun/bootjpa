@@ -7,7 +7,7 @@
 </head>
 <body>
     <!-- <form action="doJoin" method="POST" class="joinForm" onsubmit="DoJoinForm__submit(this); return false;"> -->
-    <form th:action="@{/signup/save}" method="post" th:object="${MemberDto}" class="joinForm" >
+    <form th:action="@{/signup/save}" method="post" th:object="${memberDto}" class="joinForm" >
                                                                        
         <h2>회원가입</h2>
         <div class="textForm">

@@ -1,5 +1,6 @@
 package com.example.bootjpa.data.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -24,36 +25,38 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "member")
+@Builder
+@Table(name = "user")
 public class MemberEntity {
 
-    @Id
+    
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    String memberNo;
+    int userno; //회원 일련번호 
+    
+    @Id
+    @Column(unique = true)
+    String username; //아이디
 
-    String memberId;
-    String memberPw;
-    String memberName;
-    String memberNickname;
+    String password; //비밀번호
+
+    String usernickname; //회원 닉네임
 
     String roles;
 
-    @Builder
-    public MemberEntity(String id, String password, String name, String nickname, String role) {      
-        this.memberId = id;
-        this.memberPw = password;
-        this.memberName = name;
-        this.memberNickname = nickname;
-        this.roles = role;
+    
+    public MemberEntity(String username, String password, String usernickname, String roles) {      
+        this.username = username;
+        this.password = password;
+        this.usernickname = usernickname;
+        this.roles = roles;
     }
 
     public static MemberEntity createMember(MemberDto memberDto, PasswordEncoder passwordEncoder) {
         MemberEntity member = MemberEntity.builder()
-                .id(memberDto.getMemberId())
-                .password(passwordEncoder.encode(memberDto.getMemberPw()))  //암호화처리
-                .name(memberDto.getMemberName())
-                .nickname(memberDto.getMemberNickname())
-                .role("USER")
+                .username(memberDto.getUsername())
+                .password(passwordEncoder.encode(memberDto.getPassword()))  //암호화처리
+                .usernickname(memberDto.getUsernickname())
+                .roles("USER")
                 .build();
         return member;
     }

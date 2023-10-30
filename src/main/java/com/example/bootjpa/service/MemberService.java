@@ -26,20 +26,30 @@ public class MemberService implements UserDetailsService {
 
     private MemberRepository memberRepository;
     private PasswordEncoder passwordEncoder;
-
+    public MemberService(MemberRepository memberRepository, PasswordEncoder passwordEncoder){
+        this.memberRepository = memberRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
+    
+    //로그인 서비스
     @Override
-    public UserDetails loadUserByUsername(String memberId) throws UsernameNotFoundException {
-        MemberEntity memberEntity = memberRepository.findByUsername(memberId);
-        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        grantedAuthorities.add(new SimpleGrantedAuthority("role_user"));
-        System.out.println(new User(memberEntity.getMemberName(),memberEntity.getMemberPw(),grantedAuthorities));
-        return  new User(memberEntity.getMemberName(),memberEntity.getMemberPw(),grantedAuthorities);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        MemberEntity memberEntity = memberRepository.findByUsername(username);
+        // List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+        // grantedAuthorities.add(new SimpleGrantedAuthority("role_user"));
+        // System.out.println(new User(memberEntity.getMemberName(),memberEntity.getMemberPw(),grantedAuthorities));
+        return  User.builder()
+                .username(memberEntity.getUsername())
+                .password(memberEntity.getPassword())
+                .roles(memberEntity.getRoles())
+                .build();
     }
 
-    public MemberEntity save(MemberDto memberDto){
-        MemberEntity member = MemberEntity.createMember(memberDto, passwordEncoder);
-        return memberRepository.save(member);
-    }
+    // public void signup(MemberDto memberDto){
+    //     System.out.println("svc: "+memberDto.getMemberName());
+    //     MemberEntity member = MemberEntity.createMember(memberDto, passwordEncoder);
+    //     memberRepository.save(member);
+    // }
 
     // private void validateDuplicateMember(Member member) {
     //     Member findMember = memberRepository.findByEmail(member.getEmail());
